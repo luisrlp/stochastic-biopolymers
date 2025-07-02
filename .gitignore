@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore all files in data/ except .gitkeep
+data/*
+# !data/.gitkeep # Uncomment this line if you want to keep a specific file in data/
+
+# Ignore all files in models/ except .gitkeep
+models/*
+# !models/.gitkeep # Uncomment this line if you want to keep a specific file in models/
+
+# Ignore figures directory
+figures/*
+
+# C extensions
+*.so
+
+# Virtual environments
+.venv/
+venv/
+
+# Poetry
+poetry.lock
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# VS Code settings
+.vscode/
+
+# Pytest cache
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
