@@ -20,7 +20,7 @@ if __name__ == "__main__":
     seed = args.seed
     compile = args.compile
     scale  = args.scale
-    N_samples_list = list(range(100, 2501, 100))
+    N_samples_list = list(range(100, 1001, 100))
 
     # Base Material Properties
     base_mat_props = {
@@ -118,8 +118,8 @@ if __name__ == "__main__":
         #         'mean': 0.5,
         #         'std': 0.1},
         'STRETCH': {'distribution': 'uniform',  
-                    'low': 1.00, # not working from stretch higher than 1.175
-                    'high': 1.05}, 
+                    'low': 1.14, # not working from stretch higher than 1.175
+                    'high': 1.15}, 
     }
 
     # Create a joint distribution for the random parameters
@@ -157,14 +157,14 @@ if __name__ == "__main__":
     # Initialize and run the simulation manager
     #     for sampling_method in methods_list:
 #     print(f"Using sampling method: {sampling_method}")
-#     for N_samples in N_samples_list:
-    print(f"Running simulation with N_samples: {N_samples}")
-    sim_manager = SimulationManager(base_mat_props,
-                                study_props_info,
-                                scale, 
-                                def_info,
-                                N_samples,
-                                joint_dist,
-                                sampling_method,
-                                stratify)
-    sim_manager.run_study()
+    for N_samples in N_samples_list:
+        print(f"Running simulation with N_samples: {N_samples}")
+        sim_manager = SimulationManager(base_mat_props,
+                                        study_props_info,
+                                        scale, 
+                                        def_info,
+                                        N_samples,
+                                        joint_dist,
+                                        sampling_method,
+                                        stratify)
+        sim_manager.run_study()

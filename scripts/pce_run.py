@@ -35,7 +35,7 @@ if __name__ == "__main__":
     regression_model_list = [None, linear_model.Ridge(fit_intercept=False)]
     regression_model = None # linear_model.Ridge(fit_intercept=False)
 
-    output_columns = ['force', 'dw', 'ddw']
+    output_columns = ['lambda_f', 'force', 'dw', 'ddw']
 
     # Get folder names in directory data/filament
 
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     model_timestamp = '' if args.model_timestamp is None else args.model_timestamp
 
     base_dir = os.getcwd()
-    data_timestamp_list = os.listdir(os.path.join(base_dir, 'data', scale))
+    data_timestamp_list = os.listdir(os.path.join(base_dir, 'data', scale))[:10]
 
     for data_timestamp in data_timestamp_list:
     # for regression_model in regression_model_list:
