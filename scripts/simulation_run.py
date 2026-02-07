@@ -20,7 +20,7 @@ if __name__ == "__main__":
     seed = args.seed
     compile = args.compile
     scale  = args.scale
-    N_samples_list = list(range(100, 1001, 100))
+#     N_samples_list = list(range(250, 3001, 250))
 
     # Base Material Properties
     base_mat_props = {
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     }
 
     methods_list = ['random', 'sobol', 'korobov','latin_hypercube'] # 'additive_recursion', 'sobol', 'halton', 'hammersley', 'korobov', 'latin_hypercube']
-    sampling_method = 'random'  # 'random', 'additive_recursion', 'sobol', 'halton', 'hammersley', 'korobov'    
+    sampling_method = 'latin_hypercube'  # 'random', 'additive_recursion', 'sobol', 'halton', 'hammersley', 'korobov'    
 
     ''' Scale ["filament", "GP", "element"]''' 
     # filament: study filament relations (filament level - 1D)
@@ -118,7 +118,7 @@ if __name__ == "__main__":
         #         'mean': 0.5,
         #         'std': 0.1},
         'STRETCH': {'distribution': 'uniform',  
-                    'low': 1.14, # not working from stretch higher than 1.175
+                    'low': 1.149, # not working for stretch higher than 1.175
                     'high': 1.15}, 
     }
 
@@ -136,7 +136,7 @@ if __name__ == "__main__":
     def_info = {
         'def_mode': 'U', # 'U', 'SSx', 'SSy'
         'def_initial': 1.0,
-        'def_max': 1.2,
+        'def_max': 1.15,
         'increments': 1,
         'time_initial': 0.0,
         'time_final': 1.0,
@@ -145,7 +145,8 @@ if __name__ == "__main__":
     }
 
     # Add dict with all info for train/test split (stratify, train_ratio) then pass it to simulation manager
-    stratify = True  # Stratified sampling
+    stratify = False  # Stratified sampling
+    train_ratio = 0.999
 
     # if approach == "deterministic":
     #     study_props = study_props_deterministic
@@ -156,15 +157,16 @@ if __name__ == "__main__":
 
     # Initialize and run the simulation manager
     #     for sampling_method in methods_list:
-#     print(f"Using sampling method: {sampling_method}")
-    for N_samples in N_samples_list:
-        print(f"Running simulation with N_samples: {N_samples}")
-        sim_manager = SimulationManager(base_mat_props,
-                                        study_props_info,
-                                        scale, 
-                                        def_info,
-                                        N_samples,
-                                        joint_dist,
-                                        sampling_method,
-                                        stratify)
-        sim_manager.run_study()
+    #     print(f"Using sampling method: {sampling_method}")
+    # for N_samples in N_samples_list:
+    print(f"Running simulation with N_samples: {N_samples}")
+    sim_manager = SimulationManager(base_mat_props,
+                                    study_props_info,
+                                    scale, 
+                                    def_info,
+                                    N_samples,
+                                    joint_dist,
+                                    sampling_method,
+                                    stratify,
+                                    train_ratio)
+    sim_manager.run_study()

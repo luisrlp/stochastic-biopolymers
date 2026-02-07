@@ -1,0 +1,116 @@
+# -*- coding: mbcs -*-
+#
+# Abaqus/Viewer Release 2025 replay file
+# Internal Version: 2024_09_20-14.00.46 RELr427 198590
+# Run by lpacheco on Mon Oct 20 16:12:28 2025
+#
+
+# from driverUtils import executeOnCaeGraphicsStartup
+# executeOnCaeGraphicsStartup()
+#: Executing "onCaeGraphicsStartup()" in the site directory ...
+from abaqus import *
+from abaqusConstants import *
+session.Viewport(name='Viewport: 1', origin=(0.0, 0.0), width=312.472900390625, 
+    height=207.680557250977)
+session.viewports['Viewport: 1'].makeCurrent()
+session.viewports['Viewport: 1'].maximize()
+from viewerModules import *
+from driverUtils import executeOnCaeStartup
+executeOnCaeStartup()
+o1 = session.openOdb(
+    name='/home/lpacheco/biopolymer-networks/3_affnet_cl_ai_mcs/test_in_abaqus/runs_rheometer_03_nemix/run_7091/gel_rheometer.odb', 
+    readOnly=False)
+session.viewports['Viewport: 1'].setValues(displayedObject=o1)
+#: Warning: An output database lock file /home/lpacheco/biopolymer-networks/3_affnet_cl_ai_mcs/test_in_abaqus/runs_rheometer_03_nemix/run_7091/gel_rheometer.lck has been detected. This may indicate that the output database is opened for writing by another application.
+#: /home/lpacheco/biopolymer-networks/3_affnet_cl_ai_mcs/test_in_abaqus/runs_rheometer_03_nemix/run_7091/gel_rheometer.odb will be opened read-only. 
+#: Model: /home/lpacheco/biopolymer-networks/3_affnet_cl_ai_mcs/test_in_abaqus/runs_rheometer_03_nemix/run_7091/gel_rheometer.odb
+#: Number of Assemblies:         1
+#: Number of Assembly instances: 0
+#: Number of Part instances:     3
+#: Number of Meshes:             3
+#: Number of Element Sets:       3
+#: Number of Node Sets:          6
+#: Number of Steps:              1
+session.viewports['Viewport: 1'].enableMultipleColors()
+session.viewports['Viewport: 1'].setColor(initialColor='#BDBDBD')
+cmap=session.viewports['Viewport: 1'].colorMappings['Part instance']
+session.viewports['Viewport: 1'].setColor(colorMapping=cmap)
+session.viewports['Viewport: 1'].disableMultipleColors()
+session.viewports['Viewport: 1'].enableMultipleColors()
+session.viewports['Viewport: 1'].setColor(initialColor='#BDBDBD')
+cmap = session.viewports['Viewport: 1'].colorMappings['Part instance']
+cmap.updateOverrides(overrides={'BOTTOM-1':(True, '#656966', 'Default', 
+    '#656966')})
+session.viewports['Viewport: 1'].setColor(colorMapping=cmap)
+session.viewports['Viewport: 1'].disableMultipleColors()
+session.viewports['Viewport: 1'].enableMultipleColors()
+session.viewports['Viewport: 1'].setColor(initialColor='#BDBDBD')
+cmap = session.viewports['Viewport: 1'].colorMappings['Part instance']
+cmap.updateOverrides(overrides={'TOP-1':(True, '#656966', 'Default', 
+    '#656966')})
+session.viewports['Viewport: 1'].setColor(colorMapping=cmap)
+session.viewports['Viewport: 1'].disableMultipleColors()
+session.viewports['Viewport: 1'].enableMultipleColors()
+session.viewports['Viewport: 1'].setColor(initialColor='#BDBDBD')
+cmap = session.viewports['Viewport: 1'].colorMappings['Part instance']
+cmap.updateOverrides(overrides={'GEL-1':(True, '#008080', 'Default', 
+    '#008080')})
+session.viewports['Viewport: 1'].setColor(colorMapping=cmap)
+session.viewports['Viewport: 1'].disableMultipleColors()
+leaf = dgo.LeafFromPartInstance(partInstanceName=('GEL-1', ))
+session.viewports['Viewport: 1'].odbDisplay.displayGroup.replace(leaf=leaf)
+session.viewports['Viewport: 1'].odbDisplay.commonOptions.setValues(
+    visibleEdges=NONE)
+session.viewports['Viewport: 1'].odbDisplay.basicOptions.setValues(
+    patternRotationAxis=YAXIS, patternNumCircular=12)
+session.viewports['Viewport: 1'].Layer(name='Layer-1')
+leaf = dgo.Leaf(leafType=DEFAULT_MODEL)
+session.viewports['Viewport: 1'].odbDisplay.displayGroup.replace(leaf=leaf)
+session.viewports['Viewport: 1'].odbDisplay.basicOptions.setValues(
+    patternNumCircular=1)
+session.viewports['Viewport: 1'].Layer(name='Layer-2')
+session.viewports['Viewport: 1'].setValues(visibleLayers=('Layer-1', 'Layer-2', 
+    ), currentLayer='Layer-2', displayMode=OVERLAY)
+session.viewports['Viewport: 1'].view.fitView()
+session.viewports['Viewport: 1'].view.setValues(nearPlane=165.345, 
+    farPlane=266.374, width=75.5249, height=36.935, viewOffsetX=-1.12006, 
+    viewOffsetY=1.22185)
+session.viewports['Viewport: 1'].view.setValues(nearPlane=165.423, 
+    farPlane=266.296, width=75.5606, height=36.9524, viewOffsetX=-0.64922, 
+    viewOffsetY=-0.140958)
+session.viewports['Viewport: 1'].viewportAnnotationOptions.setValues(triad=OFF, 
+    legend=OFF, title=OFF, state=OFF, annotations=OFF, compass=OFF)
+session.printOptions.setValues(vpDecorations=OFF)
+session.printToFile(fileName='newpng', format=PNG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='newsvg', format=SVG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='neweps', format=EPS, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.viewports['Viewport: 1'].view.setValues(nearPlane=162.197, 
+    farPlane=273.928, width=74.0869, height=36.2317, cameraPosition=(-71.293, 
+    653.766, -124224), cameraUpVector=(-0.00687315, 0.830022, 0.557688), 
+    cameraTarget=(-0.0390625, 767.812, -124393), viewOffsetX=-0.636558, 
+    viewOffsetY=-0.138209)
+session.viewports['Viewport: 1'].view.setValues(nearPlane=162.282, 
+    farPlane=273.757, width=74.1258, height=36.2507, cameraPosition=(-71.2904, 
+    653.755, -124224), cameraUpVector=(0.0069858, 0.827311, 0.561701), 
+    cameraTarget=(-0.036499, 767.801, -124393), viewOffsetX=-0.636892, 
+    viewOffsetY=-0.138282)
+session.viewports['Viewport: 1'].view.fitView()
+session.viewports['Viewport: 1'].view.setValues(nearPlane=162.443, 
+    farPlane=277.346, width=76.1191, height=37.2256, cameraPosition=(-56.5576, 
+    649.752, -124219), cameraUpVector=(-0.00571459, 0.817204, 0.576321), 
+    cameraTarget=(-2.94336, 773.06, -124393))
+session.viewports['Viewport: 1'].view.setValues(nearPlane=162.498, 
+    farPlane=277.041, width=76.1449, height=37.2382)
+session.viewports['Viewport: 1'].view.setValues(nearPlane=162.496, 
+    farPlane=277.043, width=76.1438, height=37.2377, cameraPosition=(-56.5576, 
+    649.752, -124219), cameraUpVector=(0.000778321, 0.816275, 0.577663), 
+    cameraTarget=(-2.94333, 773.06, -124393))
+session.printToFile(fileName='horiz', format=EPS, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='horiz', format=PNG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='horiz', format=SVG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))

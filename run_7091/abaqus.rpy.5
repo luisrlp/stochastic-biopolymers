@@ -1,0 +1,229 @@
+# -*- coding: mbcs -*-
+#
+# Abaqus/Viewer Release 2025 replay file
+# Internal Version: 2024_09_20-14.00.46 RELr427 198590
+# Run by lpacheco on Mon Oct 20 16:41:05 2025
+#
+
+# from driverUtils import executeOnCaeGraphicsStartup
+# executeOnCaeGraphicsStartup()
+#: Executing "onCaeGraphicsStartup()" in the site directory ...
+from abaqus import *
+from abaqusConstants import *
+session.Viewport(name='Viewport: 1', origin=(0.0, 0.0), width=312.472900390625, 
+    height=207.680557250977)
+session.viewports['Viewport: 1'].makeCurrent()
+session.viewports['Viewport: 1'].maximize()
+from viewerModules import *
+from driverUtils import executeOnCaeStartup
+executeOnCaeStartup()
+o1 = session.openOdb(
+    name='/home/lpacheco/biopolymer-networks/3_affnet_cl_ai_mcs/test_in_abaqus/runs_rheometer_03_nemix/run_7091/gel_rheometer.odb', 
+    readOnly=False)
+session.viewports['Viewport: 1'].setValues(displayedObject=o1)
+#: Model: /home/lpacheco/biopolymer-networks/3_affnet_cl_ai_mcs/test_in_abaqus/runs_rheometer_03_nemix/run_7091/gel_rheometer.odb
+#: Number of Assemblies:         1
+#: Number of Assembly instances: 0
+#: Number of Part instances:     3
+#: Number of Meshes:             3
+#: Number of Element Sets:       3
+#: Number of Node Sets:          6
+#: Number of Steps:              1
+leaf = dgo.LeafFromPartInstance(partInstanceName=('GEL-1', ))
+session.viewports['Viewport: 1'].odbDisplay.displayGroup.replace(leaf=leaf)
+session.viewports['Viewport: 1'].enableMultipleColors()
+session.viewports['Viewport: 1'].setColor(initialColor='#BDBDBD')
+cmap=session.viewports['Viewport: 1'].colorMappings['Part instance']
+session.viewports['Viewport: 1'].setColor(colorMapping=cmap)
+session.viewports['Viewport: 1'].disableMultipleColors()
+session.viewports['Viewport: 1'].enableMultipleColors()
+session.viewports['Viewport: 1'].setColor(initialColor='#BDBDBD')
+cmap = session.viewports['Viewport: 1'].colorMappings['Part instance']
+cmap.updateOverrides(overrides={'BOTTOM-1':(True, '#656966', 'Default', 
+    '#656966'), 'TOP-1':(True, '#656966', 'Default', '#656966')})
+session.viewports['Viewport: 1'].setColor(colorMapping=cmap)
+session.viewports['Viewport: 1'].disableMultipleColors()
+session.viewports['Viewport: 1'].enableMultipleColors()
+session.viewports['Viewport: 1'].setColor(initialColor='#BDBDBD')
+cmap = session.viewports['Viewport: 1'].colorMappings['Part instance']
+cmap.updateOverrides(overrides={'GEL-1':(True, '#008080', 'Default', 
+    '#008080')})
+session.viewports['Viewport: 1'].setColor(colorMapping=cmap)
+session.viewports['Viewport: 1'].disableMultipleColors()
+session.viewports['Viewport: 1'].odbDisplay.commonOptions.setValues(
+    visibleEdges=NONE)
+session.viewports['Viewport: 1'].odbDisplay.basicOptions.setValues(
+    patternRotationAxis=YAXIS, patternNumCircular=12)
+session.viewports['Viewport: 1'].viewportAnnotationOptions.setValues(triad=OFF, 
+    legend=OFF, title=OFF, state=OFF, annotations=OFF, compass=OFF)
+session.viewports['Viewport: 1'].odbDisplay.basicOptions.setValues(
+    referencePoints=OFF)
+session.viewports['Viewport: 1'].Layer(name='Layer-1')
+leaf = dgo.Leaf(leafType=DEFAULT_MODEL)
+session.viewports['Viewport: 1'].odbDisplay.displayGroup.replace(leaf=leaf)
+session.viewports['Viewport: 1'].odbDisplay.basicOptions.setValues(
+    patternNumCircular=1)
+session.viewports['Viewport: 1'].Layer(name='Layer-2')
+session.viewports['Viewport: 1'].setValues(visibleLayers=('Layer-1', 'Layer-2', 
+    ), currentLayer='Layer-2', displayMode=OVERLAY)
+session.printToFile(fileName='final0_00', format=PNG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='final0_00', format=SVG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='final0_00', format=EPS, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.viewports['Viewport: 1'].view.setValues(nearPlane=155.611, 
+    farPlane=280.006, width=105.61, height=51.648, cameraPosition=(2.00293, 
+    646.656, -124215), cameraUpVector=(-0.00139468, 0.827037, 0.562146), 
+    cameraTarget=(0.0078125, 767.992, -124393))
+session.viewports['Viewport: 1'].view.setValues(nearPlane=155.997, 
+    farPlane=278.956, width=105.872, height=51.7762)
+session.viewports['Viewport: 1'].view.setValues(session.views['Front'])
+session.viewports['Viewport: 1'].view.setValues(session.views['Front'])
+session.viewports['Viewport: 1'].view.setValues(session.views['Back'])
+session.viewports['Viewport: 1'].view.setValues(session.views['Top'])
+session.viewports['Viewport: 1'].view.setValues(session.views['Bottom'])
+session.viewports['Viewport: 1'].view.setValues(session.views['Left'])
+session.viewports['Viewport: 1'].view.setValues(session.views['Right'])
+session.viewports['Viewport: 1'].view.setValues(session.views['Iso'])
+session.viewports['Viewport: 1'].view.setValues(session.views['Right'])
+session.viewports['Viewport: 1'].view.setValues(session.views['Left'])
+session.viewports['Viewport: 1'].view.setValues(session.views['Bottom'])
+session.viewports['Viewport: 1'].view.setValues(nearPlane=156.71, 
+    farPlane=288.196, width=132.246, height=64.6743, cameraPosition=(-6.79779, 
+    644.875, -124210), cameraUpVector=(-0.00608005, 0.812709, 0.582639), 
+    cameraTarget=(0.0078125, 772.938, -124389))
+session.viewports['Viewport: 1'].view.setValues(session.views['Front'])
+session.viewports['Viewport: 1'].view.setValues(nearPlane=155.666, 
+    farPlane=279.928, width=105.647, height=51.6662, cameraPosition=(-11.1021, 
+    647.008, -124215), cameraUpVector=(-0.000309156, 0.827675, 0.561208), 
+    cameraTarget=(0.0078125, 767.992, -124393))
+session.printToFile(fileName='final0_01', format=PNG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='final0_01', format=SVG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='final0_01', format=EPS, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printOptions.setValues(vpDecorations=OFF)
+session.printToFile(fileName='final0_01', format=EPS, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='final0_01', format=PNG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='final0_01', format=SVG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.viewports['Viewport: 1'].enableMultipleColors()
+session.viewports['Viewport: 1'].setColor(initialColor='#BDBDBD')
+cmap = session.viewports['Viewport: 1'].colorMappings['Part instance']
+cmap.updateOverrides(overrides={'GEL-1':(True, '#FCF8C6', 'Default', 
+    '#FCF8C6')})
+session.viewports['Viewport: 1'].setColor(colorMapping=cmap)
+session.viewports['Viewport: 1'].disableMultipleColors()
+session.viewports['Viewport: 1'].enableMultipleColors()
+session.viewports['Viewport: 1'].setColor(initialColor='#BDBDBD')
+cmap = session.viewports['Viewport: 1'].colorMappings['Part instance']
+session.viewports['Viewport: 1'].setColor(colorMapping=cmap)
+session.viewports['Viewport: 1'].disableMultipleColors()
+session.viewports['Viewport: 1'].layers['Layer-2'].moveBefore('Layer-1')
+session.viewports['Viewport: 1'].layers['Layer-2'].moveAfter('Layer-1')
+session.viewports['Viewport: 1'].odbDisplay.basicOptions.setValues(
+    patternNumCircular=12)
+session.viewports['Viewport: 1'].setValues(displayMode=SINGLE)
+session.viewports['Viewport: 1'].setValues(visibleLayers=('Layer-1', 'Layer-2', 
+    ), currentLayer='Layer-2', displayMode=OVERLAY)
+session.viewports['Viewport: 1'].setValues(visibleLayers=('Layer-1', 'Layer-2', 
+    ), currentLayer='Layer-2', displayMode=OVERLAY)
+session.viewports['Viewport: 1'].setValues(visibleLayers=('Layer-1', 'Layer-2', 
+    ), currentLayer='Layer-1', displayMode=OVERLAY)
+session.viewports['Viewport: 1'].setValues(visibleLayers=('Layer-1', 'Layer-2', 
+    ), currentLayer='Layer-2', displayMode=OVERLAY)
+del session.viewports['Viewport: 1'].layers['Layer-1']
+session.viewports['Viewport: 1'].setValues(displayMode=SINGLE)
+del session.viewports['Viewport: 1'].layers['Layer-2']
+session.viewports['Viewport: 1'].enableMultipleColors()
+session.viewports['Viewport: 1'].setColor(initialColor='#BDBDBD')
+cmap = session.viewports['Viewport: 1'].colorMappings['Part instance']
+session.viewports['Viewport: 1'].setColor(colorMapping=cmap)
+session.viewports['Viewport: 1'].disableMultipleColors()
+leaf = dgo.LeafFromPartInstance(partInstanceName=('GEL-1', ))
+session.viewports['Viewport: 1'].odbDisplay.displayGroup.replace(leaf=leaf)
+session.viewports['Viewport: 1'].odbDisplay.basicOptions.setValues(
+    patternNumCircular=12)
+session.viewports['Viewport: 1'].Layer(name='Layer-1')
+leaf = dgo.Leaf(leafType=DEFAULT_MODEL)
+session.viewports['Viewport: 1'].odbDisplay.displayGroup.replace(leaf=leaf)
+session.viewports['Viewport: 1'].odbDisplay.basicOptions.setValues(
+    patternNumCircular=1)
+session.viewports['Viewport: 1'].Layer(name='Layer-2', copyViewName='Layer-1')
+session.viewports['Viewport: 1'].setValues(visibleLayers=('Layer-1', 'Layer-2', 
+    ), currentLayer='Layer-2', displayMode=OVERLAY)
+session.viewports['Viewport: 1'].view.fitView()
+session.viewports['Viewport: 1'].view.setValues(nearPlane=164.501, 
+    farPlane=267.217, width=84.3722, height=41.2617, viewOffsetX=0.0348245, 
+    viewOffsetY=0.486246)
+session.printToFile(fileName='final0_10', format=PNG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='final0_10', format=SVG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='final0_10', format=EPS, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.viewports['Viewport: 1'].view.setValues(nearPlane=157.883, 
+    farPlane=277.007, width=80.9781, height=39.6018, cameraPosition=(5.44312, 
+    647.492, -124215), cameraUpVector=(-0.0080333, 0.829105, 0.559035), 
+    cameraTarget=(0.0129395, 768.102, -124393), viewOffsetX=0.0334236, 
+    viewOffsetY=0.466685)
+session.viewports['Viewport: 1'].view.setValues(nearPlane=157.851, 
+    farPlane=276.282, width=80.9615, height=39.5937, cameraPosition=(9.80493, 
+    647.531, -124215), cameraUpVector=(-0.00940579, 0.828825, 0.559429), 
+    cameraTarget=(0.0610352, 768.102, -124393), viewOffsetX=0.0334167, 
+    viewOffsetY=0.466589)
+session.viewports['Viewport: 1'].view.setValues(nearPlane=158.292, 
+    farPlane=276.115, width=81.1875, height=39.7042, cameraPosition=(25.8184, 
+    643.734, -124219), cameraUpVector=(-0.0152666, 0.813319, 0.581617), 
+    cameraTarget=(0.210938, 768.075, -124393), viewOffsetX=0.03351, 
+    viewOffsetY=0.467891)
+session.viewports['Viewport: 1'].view.setValues(session.views['Iso'])
+session.viewports['Viewport: 1'].view.setValues(session.views['Front'])
+session.viewports['Viewport: 1'].view.setValues(nearPlane=155.619, 
+    farPlane=279.975, width=105.616, height=51.6506, cameraPosition=(5.3147, 
+    646.93, -124214), cameraUpVector=(-0.0068761, 0.827695, 0.561135), 
+    cameraTarget=(0.0078125, 767.992, -124393))
+session.viewports['Viewport: 1'].view.setValues(nearPlane=160.711, 
+    farPlane=275.688, width=62.871, height=30.7467, viewOffsetX=1.1227, 
+    viewOffsetY=3.7325)
+session.viewports['Viewport: 1'].view.setValues(nearPlane=160.552, 
+    farPlane=275.815, width=62.809, height=30.7164, cameraPosition=(4.16927, 
+    646.634, -124214), cameraUpVector=(-0.00206292, 0.826864, 0.562399), 
+    cameraTarget=(-0.0272827, 768.004, -124393), viewOffsetX=1.12159, 
+    viewOffsetY=3.72882)
+session.viewports['Viewport: 1'].view.setValues(nearPlane=160.616, 
+    farPlane=275.83, width=62.8339, height=30.7286, cameraPosition=(-8.06836, 
+    645.127, -124215), cameraUpVector=(0.0116141, 0.821372, 0.570274), 
+    cameraTarget=(-0.201172, 768.083, -124393), viewOffsetX=1.12203, 
+    viewOffsetY=3.7303)
+session.viewports['Viewport: 1'].view.setValues(session.views['Front'])
+session.viewports['Viewport: 1'].view.setValues(nearPlane=155.595, 
+    farPlane=279.983, width=105.6, height=51.6428, cameraPosition=(1.78284, 
+    647.109, -124214), cameraUpVector=(-0.00763305, 0.828419, 0.560056), 
+    cameraTarget=(0.0078125, 767.992, -124393))
+session.viewports['Viewport: 1'].view.setValues(nearPlane=156.486, 
+    farPlane=279.576, width=106.205, height=51.9388, cameraPosition=(0.394592, 
+    646.521, -124214), cameraUpVector=(-0.00756389, 0.82663, 0.562695), 
+    cameraTarget=(-0.00512695, 767.987, -124393))
+session.viewports['Viewport: 1'].view.setValues(nearPlane=161.412, 
+    farPlane=275.33, width=56.8585, height=27.8063, viewOffsetX=1.811, 
+    viewOffsetY=4.32817)
+session.viewports['Viewport: 1'].view.fitView()
+session.viewports['Viewport: 1'].view.setValues(nearPlane=149.474, 
+    farPlane=267.752, width=78.2208, height=38.2534, cameraPosition=(0.441456, 
+    651.944, -124222), cameraUpVector=(-0.00712999, 0.815497, 0.578718), 
+    cameraTarget=(0.00794983, 772.462, -124392))
+session.viewports['Viewport: 1'].view.setValues(nearPlane=149.645, 
+    farPlane=267.699, width=78.3104, height=38.2972, cameraPosition=(-2.53125, 
+    651.846, -124222), cameraUpVector=(-0.00608473, 0.815189, 0.579163), 
+    cameraTarget=(0.00463867, 772.462, -124392))
+session.printToFile(fileName='final0_11', format=PNG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='final0_11', format=SVG, canvasObjects=(
+    session.viewports['Viewport: 1'], ))
+session.printToFile(fileName='final0_11', format=EPS, canvasObjects=(
+    session.viewports['Viewport: 1'], ))

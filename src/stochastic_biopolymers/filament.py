@@ -13,10 +13,12 @@ class Filament:
     def inextensible(self, mat_props):
         """Returns the force for an inextensible filament"""
         a = mat_props['L'] / mat_props['R0F']
+        mat_props['B0'] = 294.0 * 1.38065e-5 * mat_props['Lp']
         aux = mat_props['L']**2 / (np.pi**2 * mat_props['B0'])
         force_array = np.zeros((self.increments))
         def_array = np.linspace(self.def_initial, self.def_max, self.increments)
         force_array = 1/aux * ( ((a-1)/(a - def_array)) ** (1/mat_props['BETA']) - 1 )
+        # force_array = 2 * def_array + 5 * np.exp(a) + mat_props['B0']**mat_props['BETA'] * mat_props['MU0'] / mat_props['L']**2 
         return {'force': np.array(force_array),
             'deformation': np.array(def_array),
             }
@@ -78,6 +80,7 @@ class Filament:
             force_array = np.zeros((self.increments))
             lambdaf_array = np.zeros((self.increments))
         R0 = mat_props['R0F'] + mat_props['R0C']
+        LAMBDA0F = mat_props['ETA'] * (R0/mat_props['R0F']) * (mat_props['LAMBDA0']-1) + 1
         mat_props['B0'] = 294.0 * 1.38065e-5 * mat_props['Lp']
         # Compute forces
         for i, stretch in enumerate(def_array):
@@ -96,17 +99,21 @@ class Filament:
         result = {
             'force': np.array(force_array),
             'deformation': np.array(def_array),
-            'lambda_f': np.array(lambdaf_array),
+            # 'lambda_f': np.array(lambdaf_array),
         }
 
         # If dw or ddw are True, compute derivatives
         if dw:
-            dw_array = mat_props['LAMBDA0'] * mat_props['R0F'] * force_array
+            ###OLD
+            # dw_array = mat_props['LAMBDA0'] * mat_props['R0F'] * force_array
+            dw_array = mat_props['LAMBDA0'] * R0 * force_array
             result['dw'] = np.array(dw_array)
         if ddw:
             alpha = np.pi**2 * mat_props['B0'] / (mat_props['L']**2 * mat_props['MU0'])
             f_star = force_array * mat_props['L']**2 / (np.pi**2*mat_props['B0'])
-            num = mat_props['LAMBDA0']**2 * mat_props['R0F']**2 * mat_props['MU0'] / mat_props['L']
+            ### OLD
+            # num = mat_props['LAMBDA0']**2 * mat_props['R0F']**2 * mat_props['MU0'] / mat_props['L']
+            num = mat_props['ETA'] * LAMBDA0F * mat_props['LAMBDA0'] * R0**2 * mat_props['MU0'] / mat_props['L']
             Y = mat_props['BETA']/alpha * (1 + 2*f_star*alpha)**2 / (1 + f_star + alpha * f_star**2) - mat_props['BETA'] * (1+2*alpha*f_star)/(1+alpha*f_star) - 2
             den = 1 + Y * ( (1+alpha*f_star) / (1+f_star+alpha*f_star**2) )**mat_props['BETA'] * (1-mat_props['R0F']/mat_props['L'])
             ddw_array = num / den

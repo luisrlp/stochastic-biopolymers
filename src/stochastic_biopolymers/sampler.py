@@ -49,10 +49,10 @@ class Sampler:
         samples_dict = {key: samples_list[i, :] for i, key in enumerate(self.study_props_info.keys())}
         return samples_dict
 
-    def get_material_props(self, iSample: int, samples: dict) -> dict:
+    def get_material_props(self, iSample: int) -> dict:
         """Material properties of a given configuration"""
         mat_props = self.base_mat_props.copy()
-        for key, value in samples.items():
+        for key, value in self.samples.items():
             mat_props[key] = value[iSample]
         return mat_props
     

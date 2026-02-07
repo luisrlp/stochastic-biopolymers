@@ -17,13 +17,14 @@ class SimulationManager:
     def __init__(self, base_mat_props: dict, study_props_info: dict,
                  scale: str = None, def_info: dict = None,
                  n_samples: int = 1, joint_dist: cp.J = None, sampling_method: str = 'random',
-                 stratify: bool = True):
+                 stratify: bool = True, train_ratio: float = 0.8):
         self.scale = scale
         self.n_samples = n_samples
         self.timestamp = datetime.now().strftime('%Y%m%d_%H%M%S_%f')
         self.base_dir = os.getcwd()
         self.sampling_method = sampling_method
         self.stratify = stratify
+        self.train_ratio = train_ratio
         if self.scale == "element":
             self.abaqus_dir = os.path.join(self.base_dir, 'test_in_abaqus')
             self.sim_dir = os.path.join(self.abaqus_dir, 'data', self.timestamp)
@@ -93,8 +94,7 @@ class SimulationManager:
             dict_results = {}
             for iSample in range(self.n_samples):
                 print(f"Running simulation for sample {iSample}")
-                ##### CHANGE NEXT LINE!!! SECOND ARGUMENT IS NOT NEEDED, IT IS ALREADY IN THE SAMPLER CLASS
-                mat_props = self.mat_props_manager.get_material_props(iSample, self.mat_props_manager.samples)
+                mat_props = self.mat_props_manager.get_material_props(iSample)
                 # os.chdir(self.sim_dir)
                 # Run filament relations
                 # iResults = self.simulation.inextensible(mat_props)
@@ -108,6 +108,6 @@ class SimulationManager:
             # Explode dataframe
             df_results = self.mat_props_manager.explode_df(df_results)
             df_results = self.mat_props_manager.split_samples(df_results,
-                                                              # train_ratio=0.01,
+                                                              train_ratio=self.train_ratio,
                                                               stratify=self.stratify)
             self.simulation.save_results(df_results)
