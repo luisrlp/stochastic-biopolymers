@@ -37,3 +37,6 @@ dist/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
+
+# Text files
+*.txt

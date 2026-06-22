@@ -19,8 +19,10 @@ class Filament:
         def_array = np.linspace(self.def_initial, self.def_max, self.increments)
         force_array = 1/aux * ( ((a-1)/(a - def_array)) ** (1/mat_props['BETA']) - 1 )
         # force_array = 2 * def_array + 5 * np.exp(a) + mat_props['B0']**mat_props['BETA'] * mat_props['MU0'] / mat_props['L']**2 
+        f_star = force_array * mat_props['L']**2 / (np.pi**2*mat_props['B0'])
         return {'force': np.array(force_array),
             'deformation': np.array(def_array),
+            'f_star': np.array(f_star)
             }
     
     @staticmethod
@@ -46,9 +48,9 @@ class Filament:
         rhs = 1 + aux1 - numerator / denominator
         return lhs - rhs
     
-    def fil_force(self, mat_props: dict, dw: bool = False, ddw: bool = False) -> dict:
+    def fil_force(self, mat_props: dict, dw: bool = False, ddw: bool = False, cl: bool = True) -> dict:
         """
-        Computes the force for an extensible filament with compliant crosslinker, 
+        Computes the force for an extensible filament (with compliant crosslinker), 
         given material properties.
 
         Parameters:
@@ -56,6 +58,7 @@ class Filament:
             LAMBDA0, R0F, L, MU0, B0, BETA, R0C, ETA
         - dw (bool): Flag indicating whether to compute the first derivative of the strain energy.
         - ddw (bool): Flag indicating whether to compute the second derivative.
+        - cl (bool): Flag indicating whether to include the compliant crosslinker effect.
 
         Returns:
         - dict: A dictionary containing:
@@ -79,26 +82,41 @@ class Filament:
             def_array = np.linspace(self.def_initial, self.def_max, self.increments)
             force_array = np.zeros((self.increments))
             lambdaf_array = np.zeros((self.increments))
-        R0 = mat_props['R0F'] + mat_props['R0C']
-        LAMBDA0F = mat_props['ETA'] * (R0/mat_props['R0F']) * (mat_props['LAMBDA0']-1) + 1
         mat_props['B0'] = 294.0 * 1.38065e-5 * mat_props['Lp']
-        # Compute forces
-        for i, stretch in enumerate(def_array):
-            if 0 < mat_props['ETA'] <= 1:
-                stretch = mat_props['ETA'] * (R0/mat_props['R0F']) * (stretch-1) + 1
-            try:
-                lambdaf_array[i] = stretch
-                force_array[i] = brentq(
-                    self.G, a=0.0, b=1e20, 
-                    args=(stretch, mat_props), xtol=2e-12, maxiter=100
-                )
-            except ValueError:
-                print(f"Root not found for stretch {stretch}")
-                force_array[i] = np.nan
-
+        if cl:
+            R0 = mat_props['R0F'] + mat_props['R0C']
+            LAMBDA0F = mat_props['ETA'] * (R0/mat_props['R0F']) * (mat_props['LAMBDA0']-1) + 1
+            # Compute forces
+            for i, stretch in enumerate(def_array):
+                if 0 < mat_props['ETA'] <= 1:
+                    stretch = mat_props['ETA'] * (R0/mat_props['R0F']) * (stretch-1) + 1
+                try:
+                    lambdaf_array[i] = stretch
+                    force_array[i] = brentq(
+                        self.G, a=0.0, b=1e20, 
+                        args=(stretch, mat_props), xtol=2e-12, maxiter=100
+                    )
+                except ValueError:
+                    print(f"Root not found for stretch {stretch}")
+                    force_array[i] = np.nan
+        else:
+            R0 = mat_props['R0F']
+            for i, stretch in enumerate(def_array):
+                try:
+                    lambdaf_array[i] = stretch
+                    force_array[i] = brentq(
+                        self.G, a=0.0, b=1e20, 
+                        args=(stretch, mat_props), xtol=2e-12, maxiter=100
+                    )
+                except ValueError:
+                    print(f"Root not found for stretch {stretch}")
+                    force_array[i] = np.nan
+        # Get results dictionary
+        f_star = force_array * mat_props['L']**2 / (np.pi**2*mat_props['B0'])
         result = {
             'force': np.array(force_array),
             'deformation': np.array(def_array),
+            'f_star': np.array(f_star),
             # 'lambda_f': np.array(lambdaf_array),
         }
 

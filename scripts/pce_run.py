@@ -40,10 +40,12 @@ if __name__ == "__main__":
     regression_model_list = [#None, 
                              #linear_model.OrthogonalMatchingPursuit(fit_intercept=False), 
                              linear_model.Lars(fit_intercept=False), 
+                             #linear_model.LarsCV(fit_intercept=False, cv=5),
                              #linear_model.LassoLars(fit_intercept=False),]
     ]
 
-    regression_label_list = ['LARS_NON_UNI', 
+    regression_label_list = [# 'LARS_REV_D5CV',
+                             'LARS_REV_D3', 
                              #'LASSO-LARS2'] # ['OLS', 'OMP', 'LARS', 'LASSO-LARS']
     ]
     # regression_model = None # linear_model.OrthogonalMatchingPursuit(fit_intercept=False, n_nonzero_coefs=20) # linear_model.Ridge(fit_intercept=False)
@@ -60,8 +62,8 @@ if __name__ == "__main__":
     # data_timestamp_list = os.listdir(os.path.join(base_dir, 'data', scale))[2:3] #, '4k_samples')) #[:1]
     # data_timestamp_list = ['3k_110_115']
     data_timestamp_uniform = '6k_full'
-    data_timestamp = '6k_non_uniform' # '6k_full'
-    data_file_list = os.listdir(os.path.join(base_dir, 'data', scale, data_timestamp))
+    data_timestamp = '6k_full'
+    data_file_list = [os.path.join(base_dir, 'data', scale, data_timestamp)]
     # step 100 from 100 to 3500
     n_train_list = list(range(100, 3001, 100))
 
@@ -79,7 +81,7 @@ if __name__ == "__main__":
     # Data loading from list of files
     df = pd.DataFrame()
     for data_file_id in data_file_list:
-        data_path = os.path.join(base_dir, 'data', scale, data_timestamp, data_file_id)
+        data_path = os.path.join(base_dir, 'data', scale, data_timestamp) #, data_file_id)
         print(f"Loading data from {data_path}")
     ## Load test results
         with open(f'{data_path}/results.pkl', 'rb') as file:
@@ -111,7 +113,7 @@ if __name__ == "__main__":
         regression_label = regression_label_list[iRegression]
         print(f"Using regression model: {regression_label}")
         
-        for degree in range(4,6):
+        for degree in range(3,4):
             print(f"Using polynomial degree: {degree}")
             if degree > 4 and regression_model is None:
                 print(f"Skipping OLS for degree {degree} due to computational cost.")
@@ -120,13 +122,15 @@ if __name__ == "__main__":
             poly_basis, norms = pce_constructor.poly_basis(degree=degree, 
                                         truncation=truncation)
             
-            if regression_label == 'OMP' or regression_label == 'LARS_NON_UNI':
-                coefs_list = np.linspace(5, 200, 20, dtype=int)
+            if regression_label == 'OMP' or regression_label == 'LARS_REV_D3':
+                coefs_list = np.linspace(5, 120, 20, dtype=int)
             elif regression_label == 'LASSO-LARS2':
                 coefs_list = np.logspace(-5, -2, 10)
+            elif regression_label == 'LARS_REV_D5CV': # CHANGED: Added case for CV
+                coefs_list = [None] # Not fixed, determined by CV
             else:
                 coefs_list = [0.0]
-
+            
             for n_train in list(range(250, len(df[df['split'] == 'train']) + 1, 250)):
                 print(f"Running PCE model with {n_train} training samples.")
 
@@ -137,7 +141,7 @@ if __name__ == "__main__":
                         print("Training PCE model...")
 
                         # Set the n_nonzero_coefs parameter if using OrthogonalMatchingPursuit
-                        if regression_label == 'OMP' or regression_label == 'LARS_NON_UNI':
+                        if regression_label == 'OMP' or regression_label == 'LARS_REV_D3':
                             print(f"Setting n_nonzero_coefs to {coef}")
                             n_nonzero_coefs = coef
                             regression_model.set_params(n_nonzero_coefs=n_nonzero_coefs)
@@ -147,6 +151,10 @@ if __name__ == "__main__":
                             n_nonzero_coefs = None
                             alpha = coef
                             regression_model.set_params(alpha=alpha)
+                        elif regression_label == 'LARS_REV_D5CV': # CHANGED: Added case for CV
+                            print("LarsCV finding optimal coefficients automatically...")
+                            n_nonzero_coefs = None # Not fixed, determined by CV
+                            alpha = None
                         else:
                             n_nonzero_coefs = None
                             alpha = None
